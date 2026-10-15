@@ -1,0 +1,31 @@
+{% extends "base.html" %}
+{% block content %}
+<div class="kicker">BLOG</div>
+<h1>博客</h1>
+<p class="blog-intro">记录学到的知识、研究中的思考，以及生活里值得留下的片段。</p>
+<div class="blog-controls">
+<div class="categories" role="group" aria-label="文章分类">
+{% for c in categories %}
+<button type="button" data-category="{{ c }}" aria-pressed="{{ 'true' if loop.first else 'false' }}">{{ c }}<span class="count">{{ counts[c] }}</span></button>
+{% endfor %}
+</div>
+<label class="search-label"><span class="sr-only">搜索文章</span><input id="search" type="search" placeholder="搜索标题、摘要…" aria-label="搜索文章"></label>
+</div>
+<div id="post-list">
+{% for post in posts %}
+<article class="post-card" data-category="{{ post.category }}" data-search="{{ post.title }} {{ post.summary }}">
+  <div class="post-meta"><time datetime="{{ post.date }}">{{ post.date }}</time> · {{ post.category }}</div>
+  <h2><a href="{{ url(post.path) }}">{{ post.title }}</a></h2>
+  <p>{{ post.summary }}</p>
+  <a class="read-more" href="{{ url(post.path) }}">阅读全文 →</a>
+</article>
+{% endfor %}
+</div>
+<div class="blog-empty" id="empty" role="status" aria-live="polite"{% if posts %} hidden{% endif %}>
+<svg viewBox="0 0 48 48" aria-hidden="true"><path d="M7 9h13l4 4 4-4h13v30H28l-4 3-4-3H7zM24 13v29M12 17h7m-7 6h7m-7 6h7m10-12h7m-7 6h7m-7 6h7"/></svg>
+<h3 id="empty-title">第一篇记录，敬请期待。</h3>
+<p id="empty-description">这里将陆续收录学习笔记、科研记录和生活随笔。</p>
+</div>
+<div class="blog-guide"><div><h3>学习笔记</h3><p>课程知识、论文阅读与编程实践，把理解的过程记录下来。</p></div><div><h3>科研记录</h3><p>研究问题、方法探索与阶段思考，记录每一点进展。</p></div><div><h3>生活随笔</h3><p>日常生活、旅行、阅读与感想，收藏学术之外的片段。</p></div></div>
+<noscript><p class="muted">当前显示所有文章。启用 JavaScript 后可使用分类和搜索。</p></noscript>
+{% endblock %}

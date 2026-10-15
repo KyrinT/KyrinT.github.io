@@ -1,0 +1,15 @@
+# 日常修改个人信息只需编辑这个文件。冒号后有空格，文本建议保留引号。
+title: "个人主页"
+description: "个人学术主页：研究、学习与生活。"
+name: "你的姓名"
+bio: "物理学背景 · 理论神经科学"
+affiliation: "学校 / 院系待填写"
+location: ""
+email: ""
+github: ""
+scholar: ""
+# 将头像放在 assets/images/，例如 avatar.jpg，然后填写 assets/images/avatar.jpg
+avatar: "assets/images/avatar-placeholder.svg"
+# 可选：将简历 PDF 放入 assets/files/，例如 assets/files/cv.pdf；没有则留空。
+cv: ""
+footer: "学习 · 研究 · 生活"

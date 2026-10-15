@@ -1,0 +1,16 @@
+# 日常修改个人信息只需编辑这个文件。冒号后有空格，文本建议保留引号。
+title: "个人主页"
+description: "个人学术主页：研究、学习与生活。"
+name: "Yuyu Tang"
+bio: "Computational Neuroscience·Physics·Machine Learning"
+affiliation: "Shanghai Jiao Tong University"
+location: "Shanghai, China"
+email: "yytang2026@sjtu.edu.cn"
+github: "https://github.com/KyrinT"
+scholar: ""
+
+# 将头像放在 assets/images/，例如 avatar.jpg，然后填写 assets/images/avatar.jpg
+avatar: "assets/images/Myphoto.jpg"
+# 可选：将简历 PDF 放入 assets/files/，例如 assets/files/cv.pdf；没有则留空。
+cv: "assets/files/CV.pdf"
+footer: "学习 · 研究 · 生活"
