@@ -9,16 +9,20 @@
 - 支持 Markdown、图片、表格、代码块、`$…$` 行内公式与 `$$…$$` 独立公式。
 - 采用 Python 构建静态网页，GitHub Actions 自动构建与发布；日常修改只需要编辑内容文件。
 
+**双语版本：** 顶部可切换中文与 English，日常维护方法见 [双语版本使用说明.md](双语版本使用说明.md)。英文使用 Times New Roman，中文优先使用楷体。
+
 **首次上线请先看 [开始使用.md](开始使用.md)。**
 
 ## 我平时改什么？
 
 | 要修改的内容 | 文件或目录 |
 |---|---|
-| 姓名、侧栏介绍、学校、邮箱、头像与账号链接 | `site.yaml` |
+| 姓名、邮箱、头像与账号链接等共用信息 | `site.yaml` |
+| 中文 / 英文侧栏文字、网站标题 | `site.zh.yaml` / `site.en.yaml` |
 | 首页介绍、研究兴趣、教育和获奖经历 | `content/home.md` |
 | 研究方向、论文列表 | `content/research.md` |
-| 博客文章 | `content/posts/`，每篇文章一个 `.md` 文件 |
+| 英文首页 / 英文研究页 | `content/en/home.md` / `content/en/research.md` |
+| 博客文章 | `content/posts/`，每种语言一个 `.md` 文件 |
 | 图片与头像 | `assets/images/` |
 | 简历和论文 PDF | `assets/files/` |
 | 三种文章模板 | `examples/` |
@@ -50,7 +54,7 @@ draft: false
 在第二个 `---` 下面写 Markdown 正文即可。
 
 - `category` 只能填：`学习笔记`、`科研记录`、`生活随笔`。
-- `slug` 决定文章的网址，例如 `posts/first-learning-note.html`。使用小写英文字母、数字和连字符，每篇不同；发布后尽量不要改，否则旧链接会失效。
+- `slug` 决定文章的网址，例如 `posts/first-learning-note.html`。使用小写英文字母、数字和连字符，同一语言内每篇不同，中英文译文可用相同 slug；发布后尽量不要改，否则旧链接会失效。
 - `date` 控制显示日期与排序；本项目不根据未来日期定时发布。`draft: false` 的文章在下次成功部署时就会上线。
 - `draft: true` 的文章不会进入网站。未写 `draft` 也按草稿处理。
 - 公开仓库中的源文件本身仍然可见；不想公开的私人草稿请留在仓库外。

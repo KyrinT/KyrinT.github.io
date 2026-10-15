@@ -1,0 +1,7 @@
+# 英文页面的文字。未列出的字段（头像、邮箱、GitHub、简历等）沿用 site.yaml。
+title: "Personal Website"
+description: "Yuyu Tang's academic website: research, learning, and life."
+bio: "Neuroscience · Physics · ML"
+affiliation: "Shanghai Jiao Tong University"
+location: "Shanghai, China"
+footer: "Learning · Research · Life"

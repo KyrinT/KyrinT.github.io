@@ -1,0 +1,52 @@
+<!doctype html>
+<html lang="{{ ui.html_lang }}">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="description" content="{{ description }}">
+  <title>{{ title }} | {{ site.title }}</title>
+  {% for locale, target in alternates.items() %}<link rel="alternate" hreflang="{{ 'zh-CN' if locale == 'zh' else 'en' }}" href="{{ url(target) }}">{% endfor %}
+  <link rel="stylesheet" href="{{ url('assets/css/style.css') }}">
+  {% if section == 'blog' and not is_post %}<script src="{{ url('assets/js/blog.js') }}" defer></script>{% endif %}
+  {% if has_math %}
+  <script src="{{ url('assets/js/math.js') }}"></script>
+  <script defer src="https://cdn.jsdelivr.net/npm/mathjax@3.2.2/es5/tex-chtml.js"></script>
+  {% endif %}
+</head>
+<body>
+  <a class="skip-link" href="#main">{{ ui.skip }}</a>
+  <header><div class="masthead">
+    <a class="brand" href="{{ url(home_path) }}">{{ site.title }}</a>
+    <nav class="nav" aria-label="{{ ui.navigation }}">
+    {% for key, label, href in navigation %}
+      <a href="{{ url(href) }}"{% if key == section %} aria-current="page"{% endif %}>{{ label }}</a>
+    {% endfor %}
+    </nav>
+    <nav class="lang-switch" aria-label="{{ ui.language }}">
+    {% for locale, label in [('zh', '中文'), ('en', 'English')] %}
+      {% if locale in alternates %}<a data-language-switch href="{{ url(alternates[locale]) }}" lang="{{ 'zh-CN' if locale == 'zh' else 'en' }}" hreflang="{{ 'zh-CN' if locale == 'zh' else 'en' }}"{% if locale == lang %} aria-current="true"{% endif %}>{{ label }}</a>{% else %}<span class="lang-unavailable" aria-disabled="true" title="{{ ui.unavailable }}" lang="{{ 'zh-CN' if locale == 'zh' else 'en' }}">{{ label }}</span>{% endif %}
+    {% endfor %}
+    </nav>
+  </div></header>
+  <div class="layout">
+    <aside aria-label="{{ ui.profile }}">
+      <div class="avatar"><img src="{{ url(site.avatar) }}" alt="{{ site.name }}{{ ui.portrait }}" width="150" height="150"></div>
+      <h2 class="name">{{ site.name }}</h2>
+      <p class="bio">{{ site.bio }}</p>
+      <ul class="info">
+        {% if site.affiliation %}<li><span aria-hidden="true">▤</span><span>{{ site.affiliation }}</span></li>{% endif %}
+        {% if site.location %}<li><span aria-hidden="true">⌖</span><span>{{ site.location }}</span></li>{% endif %}
+        {% if site.email %}<li><span aria-hidden="true">✉</span><a href="mailto:{{ site.email }}">{{ ui.email }}</a></li>{% endif %}
+        {% if site.github %}<li><span aria-hidden="true">↗</span><a href="{{ site.github }}" rel="me">GitHub</a></li>{% endif %}
+        {% if site.scholar %}<li><span aria-hidden="true">↗</span><a href="{{ site.scholar }}">Google Scholar</a></li>{% endif %}
+        {% if site.cv %}<li><span aria-hidden="true">↓</span><a href="{{ url(site.cv) }}">{{ ui.cv }}</a></li>{% endif %}
+      </ul>
+      <hr class="sidebar-rule"><div class="sidebar-note">{{ site.footer }}</div>
+    </aside>
+    <main id="main" class="content">
+      {% block content %}{% endblock %}
+    </main>
+  </div>
+  <footer><div class="footer-inner"><span>© {{ year }} {{ site.name }} · {{ site.title }}</span><span>{{ site.footer }}</span></div></footer>
+</body>
+</html>

@@ -1,0 +1,32 @@
+{% extends "base.html" %}
+{% block content %}
+<div class="kicker">BLOG</div>
+<h1>{{ ui.blog }}</h1>
+<p class="blog-intro">{{ ui.blog_intro }}</p>
+<div class="blog-controls">
+<div class="categories" role="group" aria-label="{{ ui.category_label }}">
+{% for c in categories %}
+<button type="button" data-category="{{ c }}" aria-pressed="{{ 'true' if loop.first else 'false' }}">{{ ui.categories[c] }}<span class="count">{{ counts[c] }}</span></button>
+{% endfor %}
+</div>
+<label class="search-label"><span class="sr-only">{{ ui.search }}</span><input id="search" type="search" placeholder="{{ ui.search_placeholder }}" aria-label="{{ ui.search }}"></label>
+</div>
+<div id="post-list">
+{% for post in posts %}
+<article class="post-card" data-category="{{ post.category }}" data-search="{{ post.title }} {{ post.summary }}">
+  <div class="post-meta"><time datetime="{{ post.date }}">{{ post.date }}</time><span>·</span><span>{{ ui.categories[post.category] }}</span><span class="language-badge">{{ post.language_label }}</span></div>
+  <h2 lang="{{ 'zh-CN' if post.lang == 'zh' else 'en' }}"><a href="{{ url(post.path) }}">{{ post.title }}</a></h2>
+  <p lang="{{ 'zh-CN' if post.lang == 'zh' else 'en' }}">{{ post.summary }}</p>
+  <a class="read-more" href="{{ url(post.path) }}">{{ ui.read_more }}</a>
+</article>
+{% endfor %}
+</div>
+<div class="blog-empty" id="empty" role="status" aria-live="polite"{% if posts %} hidden{% endif %}>
+<svg viewBox="0 0 48 48" aria-hidden="true"><path d="M7 9h13l4 4 4-4h13v30H28l-4 3-4-3H7zM24 13v29M12 17h7m-7 6h7m-7 6h7m10-12h7m-7 6h7m-7 6h7"/></svg>
+<h3 id="empty-title">{{ ui.empty_title }}</h3>
+<p id="empty-description">{{ ui.empty_description }}</p>
+</div>
+<div class="blog-guide">{% for heading, text in ui.guide %}<div><h3>{{ heading }}</h3><p>{{ text }}</p></div>{% endfor %}</div>
+<noscript><p class="muted">{{ ui.noscript }}</p></noscript>
+<script type="application/json" id="blog-i18n">{{ {'categories': ui.categories, 'empty_title': ui.empty_title, 'empty_description': ui.empty_description, 'empty_category': ui.empty_category, 'no_results': ui.no_results, 'try_again': ui.try_again}|tojson }}</script>
+{% endblock %}

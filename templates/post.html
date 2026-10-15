@@ -1,8 +1,9 @@
 {% extends "base.html" %}
 {% block content %}
-<a class="back-link" href="{{ url('blog.html') }}">← 返回博客</a>
+<a class="back-link" href="{{ url(blog_path) }}">{{ ui.back_blog }}</a>
 <h1>{{ title }}</h1>
-<div class="post-meta"><time datetime="{{ post.date }}">{{ post.date }}</time><span>·</span><a href="{{ url('blog.html') }}?category={{ post.category | urlencode }}">{{ post.category }}</a></div>
+<div class="post-meta"><time datetime="{{ post.date }}">{{ post.date }}</time><span>·</span><a href="{{ url(blog_path) }}?category={{ post.category | urlencode }}">{{ ui.categories[post.category] }}</a></div>
+{% if alternates|length < 2 %}<p class="translation-note">{{ ui.unavailable }}</p>{% endif %}
 <div class="prose">{{ body | safe }}</div>
-<div class="post-bottom"><a href="{{ url('blog.html') }}">← 查看全部文章</a></div>
+<div class="post-bottom"><a href="{{ url(blog_path) }}">{{ ui.all_posts }}</a></div>
 {% endblock %}

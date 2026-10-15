@@ -1,4 +1,6 @@
 (() => {
+  const ui = JSON.parse(document.getElementById('blog-i18n').textContent);
+  const switches = [...document.querySelectorAll('[data-language-switch]')];
   const buttons = [...document.querySelectorAll('[data-category][aria-pressed]')];
   const posts = [...document.querySelectorAll('.post-card')];
   const search = document.getElementById('search');
@@ -15,8 +17,15 @@
     }
     for (const button of buttons) button.setAttribute('aria-pressed', String(button.dataset.category === category));
     document.getElementById('empty').hidden = visible > 0;
-    document.getElementById('empty-title').textContent = q ? '没有找到相关记录。' : (category === '全部' ? '第一篇记录，敬请期待。' : '暂无' + category + '，敬请期待。');
-    document.getElementById('empty-description').textContent = q ? '试试其他关键词，或切换文章分类。' : '新的记录将在这里陆续更新。';
+    document.getElementById('empty-title').textContent = q ? ui.no_results : (category === '全部' ? ui.empty_title : ui.empty_category.replace('{category}', ui.categories[category]));
+    document.getElementById('empty-description').textContent = q ? ui.try_again : ui.empty_description;
+    // 切换语言时保留分类和搜索条件。
+    for (const link of switches) {
+      const target = new URL(link.getAttribute('href'), location.href);
+      if (category === '全部') target.searchParams.delete('category'); else target.searchParams.set('category', category);
+      if (search.value.trim()) target.searchParams.set('q', search.value.trim()); else target.searchParams.delete('q');
+      link.href = target.href;
+    }
   }
   function restore() {
     const p = new URLSearchParams(location.search);

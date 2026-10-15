@@ -1,0 +1,21 @@
+本次新增或修改的源文件：
+README.md
+assets/css/style.css
+assets/js/blog.js
+content/en/home.md
+content/en/research.md
+content/home.md
+examples/bilingual-note.en.md
+examples/bilingual-note.zh.md
+scripts/build.py
+scripts/i18n.py
+site.en.yaml
+site.zh.yaml
+templates/base.html
+templates/blog.html
+templates/post.html
+tests/test_build.py
+双语版本使用说明.md
+
+另附 _site/ 打包时预览。请按同名路径合并进原网站，保留其他文件。
+详细步骤见：双语版本使用说明.md
